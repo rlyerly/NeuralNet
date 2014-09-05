@@ -1,8 +1,8 @@
 /**
  * NeuralNet - a C++ neural network implementation.
  *
- * Adapted from the book "Neural Networks and Deep Learning" by Michael Nielson
- * (http://neuralnetworksanddeeplearning.com).
+ * Based on the book "Neural Networks and Deep Learning" by Michael Nielson
+ * (http://neuralnetworksanddeeplearning.com)
  *
  * Author: Rob Lyerly
  * Date: 8/29/2014
@@ -42,28 +42,13 @@ public:
 	} NNType;
 
 	/**
-	 * Neuron models - see Neuron.h for more details
-	 */
-	typedef enum NeuronType {
-		SIGMOID,
-		TANH
-	} NeuronType;
-
-	/**
-	 * Cost functions - see CostFunc.h for more details
-	 */
-	typedef enum CostFunction {
-		MSE
-	} CostFunction;
-
-	/**
 	 * Constructors & destructors
 	 */
 	NeuralNet(const std::vector<size_t>& layerDims,
 						double stepSize,
 						NNType nntype,
-						NeuronType ntype,
-						CostFunction cf);
+						Neuron::NeuronType ntype = Neuron::SIGMOID,
+						CostFunc::CostFuncType cftype = CostFunc::MSE);
 	~NeuralNet();
 
 	/**

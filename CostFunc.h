@@ -23,6 +23,13 @@ namespace ML
 class CostFunc
 {
 public:
+	/**
+	 * Implemented cost functions
+	 */
+	typedef enum CostFuncType {
+		MSE
+	} CostFuncType;
+
 	CostFunc(Neuron* neuron)
 		: _neuron(neuron) {}
 	virtual ~CostFunc() {};

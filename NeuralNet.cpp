@@ -31,8 +31,8 @@ using namespace ML;
 NeuralNet::NeuralNet(const vector<size_t>& layerDims,
 										 double stepSize,
 										 NNType nntype,
-										 NeuronType ntype,
-										 CostFunction cf)
+										 Neuron::NeuronType ntype,
+										 CostFunc::CostFuncType cf)
 	: _nntype(nntype), _numLayers(layerDims.size()), _stepSize(stepSize),
 		_layerDims(layerDims)
 {
@@ -65,7 +65,7 @@ NeuralNet::NeuralNet(const vector<size_t>& layerDims,
 	// Initialize neuron model for activation & backpropagation
 	switch(ntype)
 	{
-	case SIGMOID:
+	case Neuron::SIGMOID:
 		_neuron = new SigmoidNeuron();
 		break;
 /*	case TANH: TODO
@@ -79,8 +79,8 @@ NeuralNet::NeuralNet(const vector<size_t>& layerDims,
 	// Initialize cost function for backpropagation
 	switch(cf)
 	{
-	case MSE:
-		_cf = new ML::MSE(_neuron); // g++ error if ML namespace isn't declared...?
+	case CostFunc::MSE:
+		_cf = new MSE(_neuron); // g++ error if ML namespace isn't declared...?
 		break;
 	default:
 		assert(false && "Unknown cost function!");
@@ -129,6 +129,8 @@ void NeuralNet::train(unsigned long action, double reward)
 	assert(_nntype == REINFORCEMENT_LEARNING);
 	assert(action < _activations[_numLayers-2].size());
 
+	// Set output delta to (reward - activation) only for action taken, otherwise
+	// set output delta to zero (no error)
 	vector<double> outputs(_activations[_numLayers-2].size());
 	for(size_t i = 0; i < outputs.size(); i++)
 	{

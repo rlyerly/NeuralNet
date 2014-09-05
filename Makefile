@@ -3,7 +3,7 @@ VER	:= 1
 
 CXX				:= g++
 CXXFLAGS	:= -O3 -Wall
-INCLUDE		:= -I../DataStructures
+INCLUDE		:= -I../utils/DataStructures
 LDFLAGS		:= -shared -Wl,-soname,$(LIB).$(VER)
 
 PIC	:= -fPIC

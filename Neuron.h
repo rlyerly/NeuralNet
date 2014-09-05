@@ -18,6 +18,14 @@ namespace ML
 class Neuron
 {
 public:
+	/**
+	 * Implemented neuron models
+	 */
+	typedef enum NeuronType {
+		SIGMOID,
+		TANH
+	} NeuronType;
+
 	/* Appease the whiny compiler */
 	virtual ~Neuron() {};
 
